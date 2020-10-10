@@ -29,13 +29,13 @@ int main()
 	time_t t;
 	srand((unsigned) time(&t));
 
-	carta *baraja = (carta *) malloc(53*sizeof(carta));
+	carta *baraja = (carta *) malloc(52*sizeof(carta));
 
 	shuffleDeck(baraja);
 
 	//deck *mano = (deck *) malloc(7*sizeof(deck))
 	
-	/* Print the first hand (hand = mano) */	
+	/* Print the first hand (hand = mano) */
 	for(int i = 0; i<7; i++){
 		carta c = baraja[i];
 		printCards(c);
@@ -52,16 +52,64 @@ void printCards(carta card){
 	int n = card.pip;
 	switch(p){
 		case(corazon):
-			printf("[%d de corazon]\n", n);
+			if(n == 12){
+				printf("[Q de corazon ]\n");
+				break;
+			}
+			if(n == 11){
+				printf("[J de corazon ]\n");
+				break;
+			}
+			if(n == 13){
+				printf("[K de corazon ]\n");
+				break;
+			}
+			printf("[%d de corazon ]\n", n);
 			break;
 		case(diamante):
+			if(n == 11){
+				printf("[J de diamante]\n");
+				break;
+			}
+			if(n == 12){
+				printf("[Q de diamante]\n");
+				break;
+			}
+			if(n == 11){
+				printf("[K de diamante]\n");
+				break;
+			}
 			printf("[%d de diamante]\n", n);
 			break;
 		case(trebol):
-			printf("[%d de trebol]\n", n);
+			if(n == 10){
+				printf("[J de trebol  ]\n");
+				break;
+			}
+			if(n == 11){
+				printf("[Q de trebol  ]\n");
+				break;
+			}
+			if(n == 12){
+				printf("[K de trebol  ]\n");
+				break;
+			}
+			printf("[%d de trebol  ]\n", n);
 			break;
 		case(espada):
-			printf("[%d de corazon]\n", n);
+			if(n == 10){
+				printf("[J de espada  ]\n");
+				break;
+			}
+			if(n == 11){
+				printf("[Q de espada  ]\n");
+				break;
+			}
+			if(n == 12){
+				printf("[K de espada  ]\n");
+				break;
+			}
+			printf("[%d de espada  ]\n", n);
 			break;
 		default: printf("ERROR");
 	}
@@ -85,11 +133,12 @@ void shuffleDeck(carta *baraja){
 				
 		switch(palos){
 			case(corazon):
-				if(contCor < 14){
-					pip = rand()%13 + 1;
-					contCor++;
+				if(contCor < 13){
+					pip = rand()%12 + 1;
+					++contCor;
 					c.palo = corazon;
 					c.pip = pip;
+					baraja[cont] = c;
 					cont++;	
 				}
 				else
@@ -98,11 +147,12 @@ void shuffleDeck(carta *baraja){
 				}
 				break;
 			case(diamante):
-				if(contDia < 14){
-					pip = rand()%13 + 1;
-					contDia++;
+				if(contDia < 13){
+					pip = rand()%12 + 1;
+					++contDia;
 					c.palo = diamante;
 					c.pip = pip;
+					baraja[cont] = c;
 					cont++;	
 				}
 				else
@@ -111,11 +161,12 @@ void shuffleDeck(carta *baraja){
 				}
 				break;
 			case(trebol):
-				if(contTre < 14){
-					pip = rand()%13 + 1;
-					contTre++;
+				if(contTre < 13){
+					pip = rand()%12 + 1;
+					++contTre;
 					c.palo = trebol;
 					c.pip = pip;
+					baraja[cont] = c;
 					cont++;	
 				}
 				else
@@ -124,11 +175,12 @@ void shuffleDeck(carta *baraja){
 				}
 				break;
 			case(espada):
-				if(contEsp < 14){
-					pip = rand()%13 + 1;
-					contEsp++;
+				if(contEsp < 13){
+					pip = rand()%12 + 1;
+					++contEsp;
 					c.palo = espada;
 					c.pip = pip;
+					baraja[cont] = c;
 					cont++;	
 				}
 				else
@@ -142,7 +194,7 @@ void shuffleDeck(carta *baraja){
 		}
 		if(fillD == 1 && fillC == 1 && fillE == 1 && fillT == 1)
 			Full = 1;
-		
-		baraja[cont] = c;
+
+		//baraja[cont] = c;
 	}
 }
