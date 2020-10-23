@@ -94,30 +94,28 @@ int main(int argc, char *argv[]){
  	char text1[] = "Number of elements:";
 	char text2[] = "Max: ";
 	
-	ofp = fopen("answer-hw3.c", "w+");
+	ofp = fopen("answer-hw3.txt", "w+");
 	
 	//fwrite(data, 4, sizeof(data), ofp);
 
 	for(int i = 0; i <= sz; i++){
 		if( i ==  0){
-			int c = data[i];
+			
 			printf("%s %d\n", text1, data[i]);
 			fwrite(text1, 1, sizeof(text1), ofp);
-			fwrite(data, sizeof(int), 1, ofp);
+			fwrite(&data[i], sizeof(int), 1, ofp);
 			putc('\n', ofp);
 		}
 		if( i == sz){
-			int c = data[i];
 			printf("%s %d\n", text2, data[sz]);
 			fwrite(text2, 1, sizeof(text2), ofp);
-			//fwrite(&c, sizeof(c), 1, ofp);
+			fwrite(&data[i], sizeof(int), 1, ofp);
 			putc('\n', ofp);
 		}
 		if( i != 0 && i != sz){
 			printf("%d\n", data[i]);
 		}
-		int d = data[i];
-		//fwrite(&d, sizeof(d), 1, ofp);
+		fwrite(&data[i], sizeof(int), 1, ofp);
 		putc(' ', ofp);
 	}
 	
