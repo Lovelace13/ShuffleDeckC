@@ -25,6 +25,7 @@ void read_data(FILE *file, int d[], int *size);
 void insertar(int x);
 void printInOrder(nodo *r);
 void borrar(nodo *h);
+void printf_file(FILE *fptr);
 
 int main(int argc, char *argv[]){
 
@@ -41,7 +42,11 @@ int main(int argc, char *argv[]){
 	
 	ifp = fopen(argv[1], "r");	
 	read_data(ifp, data, &sz);
+	printf_file(ifp);
+	
 	fclose(ifp);
+
+	printf("\n");
 
 	/*Input the data inside the tree*/
 	int i;
@@ -49,13 +54,21 @@ int main(int argc, char *argv[]){
 		insertar(data[i]);
 	}
 
-	printf("Print inorder tree: \n");
+	printf("\nPrint inorder tree: \n");
 	printInOrder(root);
 
 	printf("\n");
 
 	borrar(root);
 	return 0;
+}
+
+void printf_file(FILE *fptr){
+	int c;
+	rewind(fptr); //similar seek
+	while((c = getc(fptr)) != EOF){
+		putc(c, stdout);
+	} 
 }
 
 void read_data(FILE *file, int d[], int *size){
